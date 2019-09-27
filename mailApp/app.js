@@ -71,4 +71,24 @@ function EmailController($scope) {
   $scope.activeTab = "inbox";
   $scope.activeTab = "sent";
   $scope.activeTab = "archive";
+
+  var app=angular.module('postMail', []);
+  app.controller('cntrl', function($scope,$http){
+    $scope.insertdata=function(){
+      $http.post("insert.php",{'id':$scope.id, 'name':$scope.name})
+      .success(function()){
+        $scope.msg="Data inserted";
+      }
+    }
+  });
+
+  var app=angular.module('recMail', []);
+  app.controller("controller", function($scope, $http){
+    $scope.display_data=function(){
+      $http.get(display.php)
+      .success(function(data)){
+        $scope.names = data;
+      }
+    }
+  });
 }
